@@ -26,34 +26,16 @@ public class SetupDatabase {
 
 	@EventListener
 	public void onApplicationEvent(ContextRefreshedEvent event) {
-		taskRepository
-				.save(new Task(0, "Task 1", "This is task 1", "ishwar", "srishti", "new", "2020/07/05", "2020/07/12"));
-
-		taskRepository
-				.save(new Task(0, "Task 2", "This is task 2", "akash", "srishti", "new", "2020/07/07", "2020/07/20"));
-		taskRepository
-				.save(new Task(0, "Task 1", "This is task 1", "ishwar", "srishti", "new", "2020/07/05", "2020/07/12"));
-
-		taskRepository
-				.save(new Task(0, "Task 2", "This is task 2", "akash", "srishti", "new", "2020/07/07", "2020/07/20"));
-		taskRepository
-				.save(new Task(0, "Task 1", "This is task 1", "ishwar", "srishti", "new", "2020/07/05", "2020/07/12"));
-
-		taskRepository
-				.save(new Task(0, "Task 2", "This is task 2", "akash", "srishti", "new", "2020/07/07", "2020/07/20"));
-		taskRepository
-				.save(new Task(0, "Task 1", "This is task 1", "ishwar", "srishti", "new", "2020/07/05", "2020/07/12"));
-
+		
 		Address address1 = new Address(0, "458", "Ajmer Road", "Degana Jn", "Nagaur", "Rajasthan", "India");
 		address1 = addressRepository.save(address1);
-		employeeRepository.save(new Employee(0, "Ishwar", "200232", "MALE", address1));
+		employeeRepository.save(new Employee(0, "Ishwar", "100001", "MALE", address1));
 		
-		Address address2 = new Address(0, "458", "Ajmer Road", "Degana Jn", "Nagaur", "Rajasthan", "India");
+		Address address2 = new Address(0, "123", "Ravan Gate", "Jhotwara", "Jaipur", "Rajasthan", "India");
 		address2 = addressRepository.save(address2);
-		employeeRepository.save(new Employee(0, "Ishwar", "200232", "MALE", address2));
+		employeeRepository.save(new Employee(0, "Neetu", "100002", "FEMALE", address2));
 		
-		Address address3 = new Address(0, "458", "Ajmer Road", "Degana Jn", "Nagaur", "Rajasthan", "India");
-		address3 = addressRepository.save(address3);
-		employeeRepository.save(new Employee(0, "Ishwar", "200232", "MALE", address3));
+		taskRepository
+				.save(new Task(0, "Task 1", "This is task 1", "Ishwar", "Neetu", "new", "2020/07/05", "2020/07/12"));
 	}
 }

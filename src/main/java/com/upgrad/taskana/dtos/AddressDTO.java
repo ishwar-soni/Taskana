@@ -8,7 +8,7 @@ import lombok.Data;
 public class AddressDTO {
 	private long id;
 	
-	@NotBlank (message = "Should not be blank")
+	@NotBlank
 	private String houseNumber;
 	
 	@NotBlank

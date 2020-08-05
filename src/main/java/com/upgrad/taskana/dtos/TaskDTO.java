@@ -4,6 +4,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import com.upgrad.taskana.annotations.Employee;
+
 import lombok.Data;
 
 @Data
@@ -19,9 +21,11 @@ public class TaskDTO {
 	private String description;
 	
 	@NotBlank
+	@Employee
 	private String assignedTo;
 	
 	@NotBlank
+	@Employee
 	private String assignedBy;
 	
 	@NotBlank
