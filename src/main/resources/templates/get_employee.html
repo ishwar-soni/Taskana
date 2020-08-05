@@ -30,11 +30,9 @@
 						<th>Status</th>
 						<th>AssignedOn</th>
 						<th>Deadline</th>
-						<th>Edit</th>
-						<th>Delete</th>
 					</tr>
 				
-					<tr th:each = "taskDTO : ${taskDTOs}">
+					<tr th:each = "taskDTO : ${employeeDTO.tasks}">
 						<td th:text="${taskDTO.id}"></td>
 						<td th:text="${taskDTO.title}"></td>
 						<td th:text="${taskDTO.description}"></td>
@@ -43,23 +41,13 @@
 						<td th:text="${taskDTO.status}"></td>
 						<td th:text="${taskDTO.assignedOn}"></td>
 						<td th:text="${taskDTO.deadline}"></td>
-						<td>
-							<a th:href="@{/tasks/update/{id}(id=${taskDTO.id})}">
-								<img th:src="@{images/edit.png}" width="20" height="20">
-							</a>
-						</td>
-						<td>
-							<a th:href="@{/tasks/delete/{id}(id=${taskDTO.id})}">
-								<img th:src="@{images/delete.png}" width="20" height="20">
-							</a>
-						</td>
 					</tr>
 				</table>
 			</div>
 			
 			<br/>
-			<a th:href="@{/employees}">Employees</a>
-			<input type="submit" value="Add Task" class="add_button" onclick="location.href='/tasks/add'">
+			
+			<a th:href="@{/employees}">Home</a>
 			
 		</div>
 	</body>

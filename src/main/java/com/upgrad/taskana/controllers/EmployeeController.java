@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.upgrad.taskana.dtos.EmployeeDTO;
+import com.upgrad.taskana.dtos.UpdateEmployeeDTO;
 import com.upgrad.taskana.services.EmployeeService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -26,6 +28,9 @@ public class EmployeeController {
 	@Autowired
 	private EmployeeService employeeService;
 	
+	@Autowired
+	private ModelMapper modelMapper;
+	
 	@GetMapping
 	public String getEmployees (Model model) {
 		log.info("Presenting all employees");
@@ -33,6 +38,19 @@ public class EmployeeController {
 		log.info("total employees: " + employeeDTOs.size());
 		model.addAttribute("employeeDTOs", employeeDTOs);
 		return "home_employees";
+	}
+	
+	@GetMapping("/{id}")
+	public String getTasks (@PathVariable long id, Model model) {
+		log.info("Get employee with id: " + id);
+		try {
+			EmployeeDTO employeeDTO = employeeService.getEmployee(id);
+			log.info("CHECK:::::" + employeeDTO);
+			model.addAttribute("employeeDTO", employeeDTO);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "get_employee";
 	}
 	
 	@PostMapping("/add")
@@ -55,13 +73,13 @@ public class EmployeeController {
 	}
 	
 	@PostMapping("/update")
-	public String updateEmployee (@Valid EmployeeDTO employeeDTO, Errors errors) {
+	public String updateEmployee (@Valid UpdateEmployeeDTO employeeDTO, Errors errors) {
 		log.info("Errors: " + errors.hasErrors());
 		if (errors.hasErrors()) {
 			return "update_employee";
 		}
 		log.info("updating employee to database : " + employeeDTO.toString());
-		employeeService.updateEmployee(employeeDTO);
+		employeeService.updateEmployee(modelMapper.map(employeeDTO, EmployeeDTO.class));
 		return "redirect:/employees";
 	}
 	

@@ -38,7 +38,10 @@
 				
 					<tr th:each = "employeeDTO : ${employeeDTOs}">
 						<td th:text="${employeeDTO.id}"></td>
-						<td th:text="${employeeDTO.name}"></td>
+						<td>
+							<a th:href="@{/employees/{id}(id=${employeeDTO.id})}" th:text="${employeeDTO.name}">
+							</a>
+						</td>
 						<td th:text="${employeeDTO.code}"></td>
 						<td th:text="${employeeDTO.gender}"></td>
 						<td th:text="${employeeDTO.address.houseNumber}"></td>
@@ -63,6 +66,7 @@
 			
 			<br/>
 			
+			<a th:href="@{/tasks}">Tasks</a>
 			<input type="submit" value="Add Employee" class="add_button" onclick="location.href='/employees/add'">
 			
 		</div>

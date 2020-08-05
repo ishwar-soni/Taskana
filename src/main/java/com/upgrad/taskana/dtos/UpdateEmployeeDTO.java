@@ -7,14 +7,13 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 import com.upgrad.taskana.annotations.Gender;
-import com.upgrad.taskana.annotations.UniqueCode;
 
 import lombok.Data;
 import lombok.ToString;
 
 @Data
 @ToString(exclude = "tasks")
-public class EmployeeDTO {
+public class UpdateEmployeeDTO {
 	private long id;
 	
 	@NotBlank
@@ -23,7 +22,6 @@ public class EmployeeDTO {
 	
 	@NotBlank
 	@Size(min = 6, max = 6, message = "Employee code should be 6 character long")
-	@UniqueCode
 	private String code;
 	
 	@Gender

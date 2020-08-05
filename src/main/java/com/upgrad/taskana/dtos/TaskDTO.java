@@ -36,4 +36,6 @@ public class TaskDTO {
 	
 	@Pattern(regexp = "[\\d]{4}[/][\\d]{2}[/][\\d]{2}", message = "Date should be of format YYYY/MM/DD")
 	private String deadline;
+	
+	private Employee employee;
 }

@@ -39,7 +39,7 @@
 					
 					<tr>
 						<td><label for="code">Code: </label></td>
-						<td><input type="text" th:field="*{code}"/></td>
+						<td><input type="text" th:field="*{code}" readonly="readonly"/></td>
 						<td class="validationError"
 							th:if="${#fields.hasErrors('code')}"
 							th:errors="*{code}"></td>

@@ -1,5 +1,6 @@
 package com.upgrad.taskana.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -11,8 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.upgrad.taskana.dtos.TaskDTO;
+import com.upgrad.taskana.entities.Employee;
 import com.upgrad.taskana.entities.Task;
 import com.upgrad.taskana.exceptions.TaskNotFoundException;
+import com.upgrad.taskana.repositories.EmployeeRepository;
 import com.upgrad.taskana.repositories.TaskRepository;
 
 @Service
@@ -20,6 +23,9 @@ public class TaskServiceImpl implements TaskService{
 	
 	@Autowired
 	private TaskRepository taskRepository;
+	
+	@Autowired
+	private EmployeeRepository employeeRepository;
 	
 	@Autowired
 	private ModelMapper modelMapper;
@@ -38,8 +44,17 @@ public class TaskServiceImpl implements TaskService{
 	@Transactional
 	public TaskDTO addTask(TaskDTO taskDTO) {
 		Task task = modelMapper.map(taskDTO, Task.class);
-		Task savedTask = taskRepository.save(task);
-		return modelMapper.map(savedTask, TaskDTO.class);
+		String assignedTo = task.getAssignedTo();
+		Employee employee = employeeRepository.findByName(assignedTo);
+		task.setEmployee(employee);
+		List<Task> existingTasks = new ArrayList<>(employee.getTasks());
+		employee.getTasks().add(task);
+		employee = employeeRepository.save(employee);
+		Task newlyAddedTask = employee.getTasks().stream()
+				.filter(t -> !existingTasks.contains(t))
+				.collect(Collectors.toList())
+				.get(0);
+		return modelMapper.map(newlyAddedTask, TaskDTO.class);
 	}
 
 	@Override
