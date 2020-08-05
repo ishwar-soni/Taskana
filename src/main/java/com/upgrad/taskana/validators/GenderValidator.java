@@ -9,7 +9,7 @@ public class GenderValidator implements ConstraintValidator<Gender, String>{
 
 	@Override
 	public boolean isValid(String value, ConstraintValidatorContext context) {
-		return value.equals("MALE") || value.equals("FEMALE") || value.equals("OTHER");
+		return value.equals("Male") || value.equals("Female") || value.equals("Other");
 	}
 
 }
