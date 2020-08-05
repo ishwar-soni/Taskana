@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+>
+	
+	<head>
+		<title>Taskana</title>
+		<link rel="stylesheet" th:href="@{/css/home_tasks.css}"/>
+	</head>
+	
+	<body>
+		<div class="outer_wrapper">
+			<h1 class="heading">
+				Taskana
+			</h1>
+			
+			<hr class="partition">
+		
+			<div class="table_outer_wrapper">
+				<table class="table_wrapper">
+				
+					<tr>
+						<th>Id</th>
+						<th>Name</th>
+						<th>Code</th>
+						<th>Gender</th>
+						<th>House No</th>
+						<th>Street</th>
+						<th>City</th>
+						<th>District</th>
+						<th>State</th>
+						<th>Country</th>
+						<th>Edit</th>
+						<th>Delete</th>
+					</tr>
+				
+					<tr th:each = "employeeDTO : ${employeeDTOs}">
+						<td th:text="${employeeDTO.id}"></td>
+						<td th:text="${employeeDTO.name}"></td>
+						<td th:text="${employeeDTO.code}"></td>
+						<td th:text="${employeeDTO.gender}"></td>
+						<td th:text="${employeeDTO.address.houseNumber}"></td>
+						<td th:text="${employeeDTO.address.street}"></td>
+						<td th:text="${employeeDTO.address.city}"></td>
+						<td th:text="${employeeDTO.address.district}"></td>
+						<td th:text="${employeeDTO.address.state}"></td>
+						<td th:text="${employeeDTO.address.country}"></td>
+						<td>
+							<a th:href="@{/employees/update/{id}(id=${employeeDTO.id})}">
+								<img th:src="@{images/edit.png}" width="20" height="20">
+							</a>
+						</td>
+						<td>
+							<a th:href="@{/employees/delete/{id}(id=${employeeDTO.id})}">
+								<img th:src="@{images/delete.png}" width="20" height="20">
+							</a>
+						</td>
+					</tr>
+				</table>
+			</div>
+			
+			<br/>
+			
+			<input type="submit" value="Add Employee" class="add_button" onclick="location.href='/employees/add'">
+			
+		</div>
+	</body>
+
+</html>

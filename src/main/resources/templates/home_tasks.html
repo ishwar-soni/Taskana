@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+>
+	
+	<head>
+		<title>Taskana</title>
+		<link rel="stylesheet" th:href="@{/css/home_tasks.css}"/>
+	</head>
+	
+	<body>
+		<div class="outer_wrapper">
+			<h1 class="heading">
+				Taskana
+			</h1>
+			
+			<hr class="partition">
+		
+			<div class="table_outer_wrapper">
+				<table class="table_wrapper">
+				
+					<tr>
+						<th>Id</th>
+						<th>Title</th>
+						<th>Description</th>
+						<th>AssignedTo</th>
+						<th>AssignedBy</th>
+						<th>Status</th>
+						<th>AssignedOn</th>
+						<th>Deadline</th>
+						<th>Edit</th>
+						<th>Delete</th>
+					</tr>
+				
+					<tr th:each = "taskDTO : ${taskDTOs}">
+						<td th:text="${taskDTO.id}"></td>
+						<td th:text="${taskDTO.title}"></td>
+						<td th:text="${taskDTO.description}"></td>
+						<td th:text="${taskDTO.assignedTo}"></td>
+						<td th:text="${taskDTO.assignedBy}"></td>
+						<td th:text="${taskDTO.status}"></td>
+						<td th:text="${taskDTO.assignedOn}"></td>
+						<td th:text="${taskDTO.deadline}"></td>
+						<td>
+							<a th:href="@{/tasks/update/{id}(id=${taskDTO.id})}">
+								<img th:src="@{images/edit.png}" width="20" height="20">
+							</a>
+						</td>
+						<td>
+							<a th:href="@{/tasks/delete/{id}(id=${taskDTO.id})}">
+								<img th:src="@{images/delete.png}" width="20" height="20">
+							</a>
+						</td>
+					</tr>
+				</table>
+			</div>
+			
+			<br/>
+			
+			<input type="submit" value="Add Task" class="add_button" onclick="location.href='/tasks/add'">
+			
+		</div>
+	</body>
+
+</html>

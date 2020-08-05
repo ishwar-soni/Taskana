@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="www.thymeleaf.org"
+>
+	<head>
+		<title>Add Employee</title>
+		<link rel="stylesheet" th:href="@{/css/add_tasks.css}"/>
+	</head>
+	
+	<body>
+		<div class="outer_wrapper">
+			<h1 class="heading">
+				Taskana
+			</h1>
+			
+			<hr class="partition">
+			
+			<form method="post" th:object="${employeeDTO}" action="/employees/add">
+				<table class="table_wrapper">
+					<tr>
+						<td><label for="name">Name: </label></td>
+						<td><input type="text" th:field="*{name}"/></td>
+						<td class="validationError"
+							th:if="${#fields.hasErrors('name')}"
+							th:errors="*{name}"></td>
+					</tr>
+					
+					<tr>
+						<td><label for="code">Code: </label></td>
+						<td><input type="text" th:field="*{code}"/></td>
+						<td class="validationError"
+							th:if="${#fields.hasErrors('code')}"
+							th:errors="*{code}"></td>
+					</tr>
+					
+					<tr>
+						<td><label for="gender">Gender: </label></td>
+						<td><input type="text" th:field="*{gender}"/></td>
+						<td class="validationError"
+							th:if="${#fields.hasErrors('gender')}"
+							th:errors="*{gender}"></td>
+					</tr>
+					
+					<tr>
+						<td><label for="houseNumber">HouseNumber: </label></td>
+						<td><input type="text" th:field="*{address.houseNumber}"/></td>
+						<td class="validationError"
+							th:if="${#fields.hasErrors('address.houseNumber')}"
+							th:errors="*{address.houseNumber}"></td>
+					</tr>
+					
+					<tr>
+						<td><label for="street">Street: </label></td>
+						<td><input type="text" th:field="*{address.street}"/></td>
+						<td class="validationError"
+							th:if="${#fields.hasErrors('address.street')}"
+							th:errors="*{address.street}"></td>
+					</tr>
+						
+					<tr>
+						<td><label for="city">City: </label></td>
+						<td><input type="text" th:field="*{address.city}"/></td>
+						<td class="validationError"
+							th:if="${#fields.hasErrors('address.city')}"
+							th:errors="*{address.city}"></td>
+					</tr>
+					
+					<tr>
+						<td><label for="district">District: </label></td>
+						<td><input type="text" th:field="*{address.district}"/></td>
+						<td class="validationError"
+							th:if="${#fields.hasErrors('address.district')}"
+							th:errors="*{address.district}"></td>
+					</tr>
+					
+					<tr>
+						<td><label for="state">State: </label></td>
+						<td><input type="text" th:field="*{address.state}"/></td>
+						<td class="validationError"
+							th:if="${#fields.hasErrors('address.state')}"
+							th:errors="*{address.state}"></td>
+					</tr>
+					
+					<tr>
+						<td><label for="country">Country: </label></td>
+						<td><input type="text" th:field="*{address.country}"/></td>
+						<td class="validationError"
+							th:if="${#fields.hasErrors('address.country')}"
+							th:errors="*{address.country}"></td>
+					</tr>
+					
+					<tr>
+						<td><input type="submit" value="Add"/></td>
+					</tr>
+				</table>
+			</form>
+			
+			<a th:href="@{/employees}">Home</a>
+		</div>
+	</body>
+</html>

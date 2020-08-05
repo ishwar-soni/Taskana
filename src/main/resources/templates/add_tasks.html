@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="www.thymeleaf.org"
+>
+	<head>
+		<title>Add Task</title>
+		<link rel="stylesheet" th:href="@{/css/add_tasks.css}"/>
+	</head>
+	
+	<body>
+		<div class="outer_wrapper">
+			<h1 class="heading">
+				Taskana
+			</h1>
+			
+			<hr class="partition">
+			
+			<form method="post" th:object="${taskDTO}" action="/tasks/add">
+				<table class="table_wrapper">
+					<tr>
+						<td><label for="title">Title: </label></td>
+						<td><input type="text" th:field="*{title}"/></td>
+						<td class="validationError"
+							th:if="${#fields.hasErrors('title')}"
+							th:errors="*{title}"></td>
+					</tr>
+					
+					<tr>
+						<td><label for="description">Description: </label></td>
+						<td><input type="text" th:field="*{description}"/></td>
+						<td class="validationError"
+							th:if="${#fields.hasErrors('description')}"
+							th:errors="*{description}"></td>
+					</tr>
+					
+					<tr>
+						<td><label for="assignedTo">AssignedTo: </label></td>
+						<td><input type="text" th:field="*{assignedTo}"/></td>
+						<td class="validationError"
+							th:if="${#fields.hasErrors('assignedTo')}"
+							th:errors="*{assignedTo}"></td>
+					</tr>
+					
+					<tr>
+						<td><label for="assignedBy">AssignedBy: </label></td>
+						<td><input type="text" th:field="*{assignedBy}"/></td>
+						<td class="validationError"
+							th:if="${#fields.hasErrors('assignedBy')}"
+							th:errors="*{assignedBy}"></td>
+					</tr>
+					
+					<tr>
+						<td><label for="status">Status: </label></td>
+						<td><input type="text" th:field="*{status}"/></td>
+						<td class="validationError"
+							th:if="${#fields.hasErrors('status')}"
+							th:errors="*{status}"></td>
+					</tr>
+					
+					<tr>
+						<td><label for="assignedOn">AssignedOn: </label></td>
+						<td><input type="text" th:field="*{assignedOn}"/></td>
+						<td class="validationError"
+							th:if="${#fields.hasErrors('assignedOn')}"
+							th:errors="*{assignedOn}"></td>
+					</tr>
+					
+					<tr>
+						<td><label for="deadline">Deadline: </label></td>
+						<td><input type="text" th:field="*{deadline}"/></td>
+						<td class="validationError"
+							th:if="${#fields.hasErrors('deadline')}"
+							th:errors="*{deadline}"></td>
+					</tr>
+					
+					<tr>
+						<td><input type="submit" value="Add"/></td>
+					</tr>
+				</table>
+			</form>
+			
+			<a th:href="@{/tasks}">Home</a>
+		</div>
+	</body>
+</html>
