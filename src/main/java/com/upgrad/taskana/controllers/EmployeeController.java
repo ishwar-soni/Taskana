@@ -6,6 +6,8 @@ import javax.validation.Valid;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.upgrad.taskana.dtos.EmployeeDTO;
 import com.upgrad.taskana.dtos.UpdateEmployeeDTO;
+import com.upgrad.taskana.entities.User;
 import com.upgrad.taskana.services.EmployeeService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -37,6 +40,9 @@ public class EmployeeController {
 		List<EmployeeDTO> employeeDTOs = employeeService.getAllEmployees();
 		log.info("total employees: " + employeeDTOs.size());
 		model.addAttribute("employeeDTOs", employeeDTOs);
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		User user = (User) authentication.getPrincipal();
+		log.info(user.toString());
 		return "home_employees";
 	}
 	
