@@ -10,9 +10,13 @@ import org.springframework.stereotype.Component;
 import com.upgrad.taskana.entities.Address;
 import com.upgrad.taskana.entities.Employee;
 import com.upgrad.taskana.entities.Task;
+import com.upgrad.taskana.entities.User;
+import com.upgrad.taskana.entities.UserAuthority;
 import com.upgrad.taskana.repositories.AddressRepository;
 import com.upgrad.taskana.repositories.EmployeeRepository;
 import com.upgrad.taskana.repositories.TaskRepository;
+import com.upgrad.taskana.repositories.UserAuthorityRepository;
+import com.upgrad.taskana.repositories.UserRepository;
 
 @Component
 public class SetupDatabase {
@@ -25,6 +29,12 @@ public class SetupDatabase {
 	
 	@Autowired
 	private AddressRepository addressRepository;
+	
+	@Autowired
+	private UserRepository userRepository;
+	
+	@Autowired
+	private UserAuthorityRepository userAuthorityRepository;
 
 	@EventListener
 	public void onApplicationEvent(ContextRefreshedEvent event) {
@@ -39,5 +49,11 @@ public class SetupDatabase {
 		
 		taskRepository
 				.save(new Task(0, "Task 1", "This is task 1", "Ishwar", "Neetu", "NEW", "2020/07/05", "2020/07/12", emp1));
+		
+		userRepository.save(new User("ishwar", "$2a$10$J/4uHzfsG/3cmZB9PFaNq.qll2LPIc7jx1Vs6SnYziV6MJlsrpb7O", true));
+		userRepository.save(new User("parth", "$2a$10$5ar.9YeQZaoTIP2Zw8Xp5euiNybhvNFzcnmIPOnBIrcquqg.UOpVG", true));
+		
+		userAuthorityRepository.save(new UserAuthority(0, "ishwar", "ROLE_USER"));
+		userAuthorityRepository.save(new UserAuthority(0, "parth", "ROLE_USER"));
 	}
 }
